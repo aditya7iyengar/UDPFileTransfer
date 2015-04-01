@@ -68,32 +68,32 @@ int main(int argc, char **argv){
     pLen = recvfrom(sockfd, recvData, 1024, 0, NULL, NULL);
     printf("Packet received from server.\n");
     if (pLen > -1){							
-      if (recvData[0] == expected){			//If it was an 'A' packet, we flip the expected to a 'B', and vise versa
+      if (recvData[0] == 'A'){			
         if (expected == 'A'){
           expected = 'B';
         } else {
           expected = 'A';     
-        }									//We then write to our file using the data received (from the 8th index in our array)
+        }									
         fwrite(&recvData[8], 1, (pLen - 8), fp);
-        recvData = NULL;					//A response packet is constructed and sent back to the server
+        recvData = NULL;					
         sendto(sockfd, response, strlen(response), 0, (struct sockaddr*)serveraddr, sizeof(*serveraddr));
+        printf (" pLen = %d ", pLen);
         printf("Packet ack sent\n");
         if (!feof(fp)){						
           packets++;
         } else 
           printf("Error!\n");
-      } else if (recvData[0] == 'E'){		//Check to see if we received a special EOF packet, and if so then send back a special EOF
-        printf("EOF command received\n");	//response packet and print out the packets sent/received, as well as close the file.
+      } else if (recvData[0] == 'E'){		
+        printf("EOF command received\n");	
         response[0] = 'E'; response[1] = 'R';
         sendto(sockfd, response, strlen(response), 0, (struct sockaddr*)serveraddr, sizeof(*serveraddr));
         pSent = atoi(&recvData[8]);
-        printf("Received %dpackets. \n",packets);
+        printf("Received %d packets. \n",packets);
         fclose(fp);
         break;
-      } else if (pLen > -1){				//Other wise, we got something unexpected and need to break.
+      } else if (pLen > -1){				
         printf("Got unexpected Char!\n");
         printf("received:%s\n", recvData);
-        break;
       }
     } else {
       printf("TIMEOUT: No Packet received\n");

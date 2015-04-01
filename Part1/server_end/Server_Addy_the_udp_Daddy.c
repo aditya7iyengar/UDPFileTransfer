@@ -60,49 +60,89 @@ int main(int argc, char **argv){
     }
   }
 											
-  char expected = 'A';						
+  char expected = 'A';	
+  int exp_packet = 0;					
   char response[2] = { 0 };
   bool waitingForResponse = true;
-  int bytes = 0, randNum;
-  while (1){								// beginning of loop sets up variables for use later
-    int bytes_read = 0;
-    unsigned char * buffer;
-    buffer = (char*) malloc (1024);
-    buffer[0] = expected;					//places the expected header in the first index of the array
-    if (expected == 'A'){					//and appropriately flips the expected value to 'A' or 'B'
+  bool initialized = false;
+  unsigned char * buffer;
+  unsigned char * buffer2;
+  unsigned char * buffer3;
+  unsigned char * buffer4;
+  unsigned char * buffer5;
+  int bytes = 0;
+  int bytes_read = 0;
+  int bytes_read2 = 0;
+  int bytes_read3 = 0; 
+  int bytes_read4 = 0;
+  int bytes_read5 = 0;
+  while (1){								
+    if ( initialized){
+      bytes_read = fread(&buffer[8], 1, 1016, fp);
+    }
+    else {
+      buffer = (char*) malloc (1024);
+      buffer2 = (char*) malloc (1024);
+      buffer3 = (char*) malloc (1024);
+      buffer4 = (char*) malloc (1024);
+      buffer5 = (char*) malloc (1024);
+      bytes_read = fread(&buffer[8], 1, 1016, fp);
+ 	  // bytes_read2 = fread(&buffer2[8], 1, 1016, fp);
+//       bytes_read3 = fread(&buffer3[8], 1, 1016, fp);
+//       bytes_read4 = fread(&buffer4[8], 1, 1016, fp);
+//       bytes_read5 = fread(&buffer5[8], 1, 1016, fp);
+    }
+    buffer[0] = 'A';					
+    if (expected == 'A'){					
       expected = 'B';     
     } else if (expected == 'B'){ 
       expected = 'A';
     }
-    bytes_read = fread(&buffer[8], 1, 1016, fp);
     if (ferror(fp)){							
       printf("Error reading file\n");			
       return 0;
     }
-    randNum = rand() % 100 + 1;					
     
     sendto(sockfd, buffer, (bytes_read + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-    printf("packet sent, waiting for response\n");
-    bytes++;
+    // sendto(sockfd, buffer2, (bytes_read2 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+//     sendto(sockfd, buffer3, (bytes_read3 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+//     sendto(sockfd, buffer4, (bytes_read4 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+//     sendto(sockfd, buffer5, (bytes_read5 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+    
+    printf("5 packets sent, waiting for response\n");
+    bytes+=(bytes_read + bytes_read2 + bytes_read3 + bytes_read4 + bytes_read5);
     waitingForResponse = true;
-    while (waitingForResponse){					//this loop waits for a response from the client that it had received the packet
+    while (waitingForResponse){					
       packetRecvd = recvfrom(sockfd, response, 2, 0, (struct sockaddr *)clientaddr, &len);
-      if (packetRecvd > -1){					//once received, if the header contains a 'Z', then we need to resend the packet
-        if (response[0] == 'Z'){				//due to packet loss
+      if (packetRecvd > -1){					
+        if (response[0] == 'Z'){				
           printf("Client timeout, resending previous packet.\n");
-          sendto(sockfd, buffer, bytes_read, 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-          printf("packet re-sent, waiting for response\n");
-          bytes++;        
-        } else if (response[0] == 'E'){			//if the client responsed with an 'E', the last packet was sent and received
+          sendto(sockfd, buffer, bytes_read + 8, 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+          // sendto(sockfd, buffer2, (bytes_read2 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+//     	  sendto(sockfd, buffer3, (bytes_read3 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+//     	  sendto(sockfd, buffer4, (bytes_read4 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+//     	  sendto(sockfd, buffer5, (bytes_read5 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+          printf("packets re-sent, waiting for response\n");
+          bytes+=(bytes_read + bytes_read2 + bytes_read3 + bytes_read4 + bytes_read5);;        
+        } else if (response[0] == 'E'){			
            printf("Received final ack\n");
            return 0;
         } else if (response[0] != expected && response[1] == 'R'){
-          printf("Client Received packet.\n");	//we can continue to send more packets
+          printf("Client Received packets.\n");	
+           // buffer = buffer2;
+//            buffer2 = buffer3;
+//            buffer3 = buffer4;
+//            buffer4 = buffer5;
+//            buffer2[0] = 'q';
+//            buffer3[0] = 'q';
+//            buffer4[0] = 'q';
+//            buffer5[0] = 'q';
+          initialized = true;
           waitingForResponse = false;
         }
       }
-      if (feof(fp)) {							//if we reached the end of the file, then send a packet with an 'E' in the header,
-        printf("Server Sent bytes:%d\n", bytes);//signifying that we are all done sending the data
+      if (feof(fp)) {							
+        printf("Server Sent bytes:%d\n", bytes);
         buffer[0] = 'E';
         char integer_string[32];
         sprintf(integer_string, "%d", bytes);
