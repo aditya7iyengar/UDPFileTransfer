@@ -8,6 +8,11 @@
 FILE *fp;
 int packetRecvd, packet_loss;
 
+struct numbererd_packet{
+ 	unsigned char * data;
+ 	int number;
+}
+
 int main(int argc, char **argv){
 
 	int cport = 0;							
@@ -87,12 +92,12 @@ int main(int argc, char **argv){
       buffer4 = (char*) malloc (1024);
       buffer5 = (char*) malloc (1024);
       bytes_read = fread(&buffer[8], 1, 1016, fp);
- 	  // bytes_read2 = fread(&buffer2[8], 1, 1016, fp);
-//       bytes_read3 = fread(&buffer3[8], 1, 1016, fp);
-//       bytes_read4 = fread(&buffer4[8], 1, 1016, fp);
-//       bytes_read5 = fread(&buffer5[8], 1, 1016, fp);
+ 	  bytes_read2 = fread(&buffer2[8], 1, 1016, fp);
+      bytes_read3 = fread(&buffer3[8], 1, 1016, fp);
+      bytes_read4 = fread(&buffer4[8], 1, 1016, fp);
+      bytes_read5 = fread(&buffer5[8], 1, 1016, fp);
     }
-    buffer[0] = 'A';					
+      buffer[0] = 'A';					
     if (expected == 'A'){					
       expected = 'B';     
     } else if (expected == 'B'){ 
@@ -104,10 +109,10 @@ int main(int argc, char **argv){
     }
     
     sendto(sockfd, buffer, (bytes_read + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-    // sendto(sockfd, buffer2, (bytes_read2 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-//     sendto(sockfd, buffer3, (bytes_read3 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-//     sendto(sockfd, buffer4, (bytes_read4 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-//     sendto(sockfd, buffer5, (bytes_read5 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+    sendto(sockfd, buffer2, (bytes_read2 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+    sendto(sockfd, buffer3, (bytes_read3 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+    sendto(sockfd, buffer4, (bytes_read4 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+    sendto(sockfd, buffer5, (bytes_read5 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
     
     printf("5 packets sent, waiting for response\n");
     bytes+=(bytes_read + bytes_read2 + bytes_read3 + bytes_read4 + bytes_read5);
@@ -118,10 +123,10 @@ int main(int argc, char **argv){
         if (response[0] == 'Z'){				
           printf("Client timeout, resending previous packet.\n");
           sendto(sockfd, buffer, bytes_read + 8, 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-          // sendto(sockfd, buffer2, (bytes_read2 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-//     	  sendto(sockfd, buffer3, (bytes_read3 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-//     	  sendto(sockfd, buffer4, (bytes_read4 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
-//     	  sendto(sockfd, buffer5, (bytes_read5 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+          sendto(sockfd, buffer2, (bytes_read2 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+    	  sendto(sockfd, buffer3, (bytes_read3 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+    	  sendto(sockfd, buffer4, (bytes_read4 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+    	  sendto(sockfd, buffer5, (bytes_read5 + 8), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
           printf("packets re-sent, waiting for response\n");
           bytes+=(bytes_read + bytes_read2 + bytes_read3 + bytes_read4 + bytes_read5);;        
         } else if (response[0] == 'E'){			
@@ -129,14 +134,14 @@ int main(int argc, char **argv){
            return 0;
         } else if (response[0] != expected && response[1] == 'R'){
           printf("Client Received packets.\n");	
-           // buffer = buffer2;
-//            buffer2 = buffer3;
-//            buffer3 = buffer4;
-//            buffer4 = buffer5;
-//            buffer2[0] = 'q';
-//            buffer3[0] = 'q';
-//            buffer4[0] = 'q';
-//            buffer5[0] = 'q';
+          buffer = buffer2;
+          buffer2 = buffer3;
+          buffer3 = buffer4;
+          buffer4 = buffer5;
+          buffer2[0] = 'q';
+          buffer3[0] = 'q';
+          buffer4[0] = 'q';
+          buffer5[0] = 'q';
           initialized = true;
           waitingForResponse = false;
         }
