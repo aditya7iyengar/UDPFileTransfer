@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		260E95521AD34C9B00DBD9B3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 260E95511AD34C9B00DBD9B3 /* main.c */; };
-		260E95591AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c in Sources */ = {isa = PBXBuildFile; fileRef = 260E95581AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c */; };
 		260E955B1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c in Sources */ = {isa = PBXBuildFile; fileRef = 260E955A1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c */; };
 /* End PBXBuildFile section */
 
@@ -26,9 +24,8 @@
 
 /* Begin PBXFileReference section */
 		260E954E1AD34C9A00DBD9B3 /* UDPFileTransfer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UDPFileTransfer; sourceTree = BUILT_PRODUCTS_DIR; };
-		260E95511AD34C9B00DBD9B3 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		260E95581AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Client_Addy_the_udp_Daddy.c; sourceTree = "<group>"; };
 		260E955A1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Server_Addy_the_udp_Daddy.c; sourceTree = "<group>"; };
+		260E955C1AD43CFC00DBD9B3 /* lambo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lambo.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +58,8 @@
 		260E95501AD34C9A00DBD9B3 /* UDPFileTransfer */ = {
 			isa = PBXGroup;
 			children = (
-				260E95511AD34C9B00DBD9B3 /* main.c */,
-				260E95581AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c */,
 				260E955A1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c */,
+				260E955C1AD43CFC00DBD9B3 /* lambo.jpg */,
 			);
 			path = UDPFileTransfer;
 			sourceTree = "<group>";
@@ -124,8 +120,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				260E95521AD34C9B00DBD9B3 /* main.c in Sources */,
-				260E95591AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c in Sources */,
 				260E955B1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
