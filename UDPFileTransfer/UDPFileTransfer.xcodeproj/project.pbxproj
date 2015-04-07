@@ -1,0 +1,247 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		260E95521AD34C9B00DBD9B3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 260E95511AD34C9B00DBD9B3 /* main.c */; };
+		260E95591AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c in Sources */ = {isa = PBXBuildFile; fileRef = 260E95581AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c */; };
+		260E955B1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c in Sources */ = {isa = PBXBuildFile; fileRef = 260E955A1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		260E954C1AD34C9A00DBD9B3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		260E954E1AD34C9A00DBD9B3 /* UDPFileTransfer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UDPFileTransfer; sourceTree = BUILT_PRODUCTS_DIR; };
+		260E95511AD34C9B00DBD9B3 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		260E95581AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Client_Addy_the_udp_Daddy.c; sourceTree = "<group>"; };
+		260E955A1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Server_Addy_the_udp_Daddy.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		260E954B1AD34C9A00DBD9B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		260E95451AD34C9A00DBD9B3 = {
+			isa = PBXGroup;
+			children = (
+				260E95501AD34C9A00DBD9B3 /* UDPFileTransfer */,
+				260E954F1AD34C9A00DBD9B3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		260E954F1AD34C9A00DBD9B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				260E954E1AD34C9A00DBD9B3 /* UDPFileTransfer */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		260E95501AD34C9A00DBD9B3 /* UDPFileTransfer */ = {
+			isa = PBXGroup;
+			children = (
+				260E95511AD34C9B00DBD9B3 /* main.c */,
+				260E95581AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c */,
+				260E955A1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c */,
+			);
+			path = UDPFileTransfer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		260E954D1AD34C9A00DBD9B3 /* UDPFileTransfer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 260E95551AD34C9B00DBD9B3 /* Build configuration list for PBXNativeTarget "UDPFileTransfer" */;
+			buildPhases = (
+				260E954A1AD34C9A00DBD9B3 /* Sources */,
+				260E954B1AD34C9A00DBD9B3 /* Frameworks */,
+				260E954C1AD34C9A00DBD9B3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UDPFileTransfer;
+			productName = UDPFileTransfer;
+			productReference = 260E954E1AD34C9A00DBD9B3 /* UDPFileTransfer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		260E95461AD34C9A00DBD9B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = AdiTude;
+				TargetAttributes = {
+					260E954D1AD34C9A00DBD9B3 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = 260E95491AD34C9A00DBD9B3 /* Build configuration list for PBXProject "UDPFileTransfer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 260E95451AD34C9A00DBD9B3;
+			productRefGroup = 260E954F1AD34C9A00DBD9B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				260E954D1AD34C9A00DBD9B3 /* UDPFileTransfer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		260E954A1AD34C9A00DBD9B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				260E95521AD34C9B00DBD9B3 /* main.c in Sources */,
+				260E95591AD34CB100DBD9B3 /* Client_Addy_the_udp_Daddy.c in Sources */,
+				260E955B1AD34CBA00DBD9B3 /* Server_Addy_the_udp_Daddy.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		260E95531AD34C9B00DBD9B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		260E95541AD34C9B00DBD9B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		260E95561AD34C9B00DBD9B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		260E95571AD34C9B00DBD9B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		260E95491AD34C9A00DBD9B3 /* Build configuration list for PBXProject "UDPFileTransfer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				260E95531AD34C9B00DBD9B3 /* Debug */,
+				260E95541AD34C9B00DBD9B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		260E95551AD34C9B00DBD9B3 /* Build configuration list for PBXNativeTarget "UDPFileTransfer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				260E95561AD34C9B00DBD9B3 /* Debug */,
+				260E95571AD34C9B00DBD9B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 260E95461AD34C9A00DBD9B3 /* Project object */;
+}

@@ -7,14 +7,17 @@
 
 FILE *fp;
 int packetRecvd, packet_loss;
+typedef unsigned char byte;
 
 struct numbererd_packet{
  	unsigned char * data;
  	int number;
-}
+};
 
 byte* checksum(char * buf){
-	
+    byte * remainder;
+    
+    return remainder;
 }
 int main(int argc, char **argv){
 

@@ -6,8 +6,10 @@
 #include <stdbool.h>
 FILE *fp; 
 
-bool checksum(char * buf, byte* rem){
+typedef unsigned char byte;
 
+bool checksum(char * buf){
+    return false;
 } 
 
 int main(int argc, char **argv){
@@ -78,7 +80,7 @@ int main(int argc, char **argv){
         } else {
           expected = 'A';     
         }
-    	if (!checksum()){
+    	if (!checksum(recvData)){
     		
     	}
     	else {									
