@@ -45,7 +45,7 @@ int main(int argc, char **argv){
     cport = atoi(argv[1]);
     printf("Listening on port #%d.\n", cport);
     
-    int sockfd, len;
+    unsigned int sockfd, len;
     struct sockaddr_in *serveraddr = malloc(sizeof(struct sockaddr_in));
     struct sockaddr_in *clientaddr = malloc(sizeof(struct sockaddr_in));
     struct timeval to;
@@ -66,7 +66,7 @@ int main(int argc, char **argv){
     while(1){
         len=sizeof(clientaddr);
         char filename[5000] = { 0 };
-        int opened = 0;
+        //int opened = 0;
         printf("Waiting for connection.\n");
         packetRecvd = recvfrom(sockfd, filename, 5000, 0, (struct sockaddr *)clientaddr, &len);
         if (packetRecvd > -1){
@@ -85,16 +85,16 @@ int main(int argc, char **argv){
     }
     
     char expected = 'A';
-    int exp_packet = 0;
+    //int exp_packet = 0;
     char response[2] = { 0 };
     bool waitingForResponse = true;
     bool initialized = false;
-    unsigned char * buffer;
-    unsigned char * buffer2;
-    unsigned char * buffer3;
-    unsigned char * buffer4;
-    unsigned char * buffer5;
-    buffer = (char*) malloc (1024);
+    char * buffer;
+    char * buffer2;
+    char * buffer3;
+    char * buffer4;
+    char * buffer5;
+    buffer = ( char*) malloc (1024);
     buffer2 = (char*) malloc (1024);
     buffer3 = (char*) malloc (1024);
     buffer4 = (char*) malloc (1024);
