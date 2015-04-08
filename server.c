@@ -148,6 +148,11 @@ int main(int argc, char **argv){
     	printf("num[1]:%c\n", num[1]);
     	buffer[0] = 'A';
     	buffer[9] = num[0];
+        if (expected == 'A'){
+            expected = 'B';
+        } else if (expected == 'B'){
+            expected = 'A';
+        }
         if (ferror(fp)){
             printf("Error reading file\n");
             return 0;
