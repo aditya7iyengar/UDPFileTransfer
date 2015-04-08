@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <arpa/inet.h>
 FILE *fp; 
 
 bool checksum(char * buf, int check){
@@ -82,11 +83,11 @@ int main(int argc, char **argv){
 											
   char expected = 'A';
   int pLen;
-  int pSent;
+  //int pSent;
   char npr[2] = { "ZR" };
   int packets = 0;
   while (1){								
-    unsigned char * recvData;				
+    char * recvData;				
     recvData = (char*) malloc (1024);
     char response[2] = {expected, 'R'};	  
     pLen = recvfrom(sockfd, recvData, 1024, 0, NULL, NULL);
@@ -123,7 +124,7 @@ int main(int argc, char **argv){
         printf("EOF command received\n");	
         response[0] = 'E'; response[1] = 'R';
         sendto(sockfd, response, strlen(response), 0, (struct sockaddr*)serveraddr, sizeof(*serveraddr));
-        pSent = atoi(&recvData[8]);
+       // pSent = atoi(&recvData[8]);
         printf("Received %d packets. \n",packets);
         fclose(fp);
         break;
