@@ -106,8 +106,11 @@ int main(int argc, char **argv){
     int bytes_read4 = 0;
     int bytes_read5 = 0;
     while (1){
-        if ( initialized){
-            bytes_read = fread(&buffer[40], 1, 981, fp);
+        if (initialized){
+            bytes_read5 = fread(&buffer5[40], 1, 981, fp);
+            buffer5[bytes_read5+40] = '/';
+            buffer5[bytes_read5+41] = '@';
+            buffer5[bytes_read5+42] = '/';
         }
         else {
             bytes_read = fread(&buffer[40], 1, 981, fp);
@@ -145,11 +148,6 @@ int main(int argc, char **argv){
     	printf("num[1]:%c\n", num[1]);
     	buffer[0] = 'A';
     	buffer[9] = num[0];
-        if (expected == 'A'){
-            expected = 'B';
-        } else if (expected == 'B'){
-            expected = 'A';
-        }
         if (ferror(fp)){
             printf("Error reading file\n");
             return 0;
@@ -185,6 +183,7 @@ int main(int argc, char **argv){
                     buffer2 = buffer3;
                     buffer3 = buffer4;
                     buffer4 = buffer5;
+                    buffer[0] = 'A';
                     buffer2[0] = 'q';
                     buffer3[0] = 'q';
                     buffer4[0] = 'q';
