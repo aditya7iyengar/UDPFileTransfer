@@ -15,13 +15,9 @@ bool checksum(char * buf, int check){
     while (!(*iter == '/' && *(iter + 1) =='@' && *(iter + 2) == '/')){
 
         //printf("iter:%c", *iter);
-
         sum += *iter;
-
         iter++;
-
     }
-
     printf ("sum: %d\n",sum);
     
     remainder = sum%16;
@@ -102,9 +98,9 @@ int main(int argc, char **argv){
         } else {
           expected = 'A';     
         }
-        printf ("recvData[8]: %c\n", recvData[8]);
+        printf ("recvData[9]: %c\n", recvData[9]);
         
-    	int ch = recvData[8] - '0';
+    	int ch = recvData[9] - '0';
         printf ("ch: %d\n",ch);
 
     	if (!checksum(&recvData[40],ch)){
@@ -113,7 +109,7 @@ int main(int argc, char **argv){
 
     	}
     	else {									
-        	fwrite(&recvData[8], 1, (pLen - 8), fp);
+        	fwrite(&recvData[40], 1, (pLen - 43), fp);
         	recvData = NULL;					
         	sendto(sockfd, response, strlen(response), 0, (struct sockaddr*)serveraddr, sizeof(*serveraddr));
         	printf (" pLen = %d ", pLen);
@@ -123,12 +119,12 @@ int main(int argc, char **argv){
         	}else 
           		printf("Error!\n");
         }
-      } else if (recvData[0] == 'E'){		
+      } else if (recvData[1] == 'E'){		
         printf("EOF command received\n");	
         response[0] = 'E'; response[1] = 'R';
         sendto(sockfd, response, strlen(response), 0, (struct sockaddr*)serveraddr, sizeof(*serveraddr));
-        pSent = atoi(&recvData[8]);
-        printf("Received %d packets. \n",packets);
+        //pSent = atoi(&recvData[8]);
+        //printf("Received %d packets. \n",packets);
         fclose(fp);
         break;
       } else if (pLen > -1){				
