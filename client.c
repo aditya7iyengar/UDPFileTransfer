@@ -4,7 +4,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <arpa/inet.h>
 FILE *fp; 
 
 bool checksum(char * buf, int check){
@@ -83,11 +82,11 @@ int main(int argc, char **argv){
 											
   char expected = 'A';
   int pLen;
-  //int pSent;
+  int pSent;
   char npr[2] = { "ZR" };
   int packets = 0;
   while (1){								
-    char * recvData;				
+    unsigned char * recvData;				
     recvData = (char*) malloc (1024);
     char response[2] = {expected, 'R'};	  
     pLen = recvfrom(sockfd, recvData, 1024, 0, NULL, NULL);
@@ -101,7 +100,15 @@ int main(int argc, char **argv){
         }
         printf ("recvData[9]: %c\n", recvData[9]);
         
-    	int ch = recvData[9] - '0';
+    	int ch1 = recvData[9] - '0';
+    	printf ("ch1: %d\n",ch1);
+    	int ch2 = recvData[10] - '0';
+    	printf ("ch2: %d\n",ch2);
+    	int ch;
+    	if ( ch2 > 0)
+    		ch = ch1*10 + ch2;
+    	else
+    		ch = ch1;
         printf ("ch: %d\n",ch);
 
     	if (!checksum(&recvData[40],ch)){
@@ -124,7 +131,7 @@ int main(int argc, char **argv){
         printf("EOF command received\n");	
         response[0] = 'E'; response[1] = 'R';
         sendto(sockfd, response, strlen(response), 0, (struct sockaddr*)serveraddr, sizeof(*serveraddr));
-       // pSent = atoi(&recvData[8]);
+        pSent = atoi(&recvData[8]);
         printf("Received %d packets. \n",packets);
         fclose(fp);
         break;
