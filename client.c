@@ -93,6 +93,11 @@ int main(int argc, char **argv){
     printf("Packet received from server.\n");
     if (pLen > -1){							
       if (recvData[0] == 'A'){			
+        if (expected == 'A'){
+          expected = 'B';
+        } else {
+          expected = 'A';     
+        }
         printf ("recvData[9]: %c\n", recvData[9]);
         
     	int ch = recvData[9] - '0';
