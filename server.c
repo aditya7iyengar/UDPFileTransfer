@@ -144,7 +144,7 @@ int main(int argc, char **argv){
     	printf("num[0]:%c\n", num[0]);
     	printf("num[1]:%c\n", num[1]);
     	buffer[0] = 'A';
-    	buffer[8] = num[0];
+    	buffer[9] = num[0];
         if (expected == 'A'){
             expected = 'B';
         } else if (expected == 'B'){
