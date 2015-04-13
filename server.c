@@ -64,7 +64,7 @@ int main(int argc, char **argv){
     
     
     while(1){
-        len=sizeof(clientaddr);
+        len=sizeof(*clientaddr);
         char filename[5000] = { 0 };
         //int opened = 0;
         printf("Waiting for connection.\n");
