@@ -31,6 +31,23 @@ bool checksum(char * buf, int check){
 
 } 
 
+int checkisFull(int received[])
+{
+	int a;
+	int count = 0;
+	for(a = 0; a < 5; a++) 
+	{
+		if(received[a] != 0)
+		{
+			count++;
+		}
+	}
+	if(count == 5){
+		return 1;
+	}
+		return 0;
+}
+
 int main(int argc, char **argv){
 	
 	if(argc != 3)							
@@ -85,14 +102,14 @@ int main(int argc, char **argv){
   int pLen;
   int packetNum;
   
-  // Use to check if packets are received in the correct order
-  int correctOrder[5] = {1, 2, 3, 4, 5};
   //Can't figure out how to append each packet number into the array and then check
-  int receivedOrder[5];
+  
   
   //int pSent;
   char npr[2] = { "ZR" };
-  int packets = 0;
+ 
+  int packet = 0;
+  int receivedOrder[5] = {0,0,0,0,0};
   while (1){								
     char * recvData;				
     recvData = (char*) malloc (1024);
@@ -104,27 +121,76 @@ int main(int argc, char **argv){
     //printf("Packet received from server.\n");
     
     if (pLen > -1){		
-		//int packetNum = recvData[1020] -'0';
-		//printf("Packet %d\n", packetNum);		
-		    // Check and print off packet number as they are received
-    packetNum = recvData[11] - '0';
-    printf("Packet #%d received from server\n",packetNum); 
-    
-    //Keep track of what number order packet you're at in order to test if correct packet received
-    if(packets <= 5)
-    {
-		packets++; 
-	} else
-	{
-		packets = 0;
-	}
-	printf("Expected : %d\n", packets);			
+			//Try to figure out how the packets are being sent. Can't find buffer[11] for each one.
+			
+				packetNum = recvData[11] - '0';
+				receivedOrder[packet] = packetNum;
+				//int ordPack = recvData[11];
+				if(packet <5 && packet >= 0){
+					packet++;
+				}	
+				
+        	       printf("Packet #%d received from server\n",packetNum); 
+        	      // printf("Received: %d\n", receivedOrder[packet]);
+        	       int p;
+					printf("Re :\n");
+					for(p = 0; p < 5; p++)
+					{
+						printf("	%d \n", receivedOrder[p]);
+					}
+        	       if(checkisFull(receivedOrder) == 1)
+				{
+					    int m;
+					printf("Current Order :\n");
+					for(m = 0; m < 5; m++)
+					{
+						printf("	%d \n", receivedOrder[m]);
+					}
+					int i,j;
+					
+					//check to see if in correct order
+					for(i = 0; i < 5; i++)
+					{
+						
+						if(receivedOrder[i] != i+1)
+						{
+							//Find correct packet and swap
+							for(j = 0; j < 5; j++)
+							{
+								if(receivedOrder[j] == i+1)
+								{
+									printf("Packets %d and %d Out of Order \n", i+1, j);
+									int temp = receivedOrder[j];
+									receivedOrder[j] = receivedOrder[i];
+									receivedOrder[i] = temp;
+								}
+							}
+						}
+					}
+					int p;
+					printf("Re-Ordered :\n");
+					for(p = 0; p < 5; p++)
+					{
+						printf("	%d \n", receivedOrder[p]);
+					}
+					printf("RESET\n");
+					int l;
+					 for(l = 0; l < 5; l++)
+					{
+						receivedOrder[l] = 0;
+						//printf("	%d\n", receivedOrder[l]); 
+					}
+					packet = 0;
+					
+				}
+        	 
       if (recvData[0] == 'A'){			
         if (expected == 'A'){
           expected = 'B';
         } else {
           expected = 'A';     
         }
+        
         //printf ("recvData[9]: %c\n", recvData[9]);
         
     	int ch1 = recvData[9] - '0';
@@ -136,7 +202,7 @@ int main(int argc, char **argv){
     		ch = ch1*10 + ch2;
     	else
     		ch = ch1;
-        printf ("ch: %d\n",ch);
+        printf ("ch: %d\n",ch);        	
 
     	if (!checksum(&recvData[40],ch)){
 
@@ -145,12 +211,14 @@ int main(int argc, char **argv){
     	}
     	else {									
         	fwrite(&recvData[40], 1, (pLen - 43), fp);
+        				
         	recvData = NULL;					
         	sendto(sockfd, response, strlen(response), 0, (struct sockaddr*)serveraddr, sizeof(*serveraddr));
         	printf (" pLen = %d ", pLen);
         	printf("Packet ack sent\n");
-        	if (!feof(fp)){						
-          		//packets++;
+        	if (!feof(fp)){	
+					  
+				
         	}else 
           		printf("Error!\n");
         }
