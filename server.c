@@ -118,26 +118,31 @@ int main(int argc, char **argv){
         }
         else {
             bytes_read = fread(&buffer[40], 1, 981, fp);
+            //buffer[1020] = '1';
             buffer[1021] = '/';
             buffer[1022] = '@';
             buffer[1023] = '/';
             
             bytes_read2 = fread(&buffer2[40], 1, 981, fp);
+            //buffer2[1020] = '2';
             buffer2[1021] = '/';
             buffer2[1022] = '@';
             buffer2[1023] = '/';
             
             bytes_read3 = fread(&buffer3[40], 1, 981, fp);
+           // buffer3[1020] = '3';
             buffer3[1021] = '/';
             buffer3[1022] = '@';
             buffer3[1023] = '/';
             
             bytes_read4 = fread(&buffer4[40], 1, 981, fp);
+           // buffer4[1020] = '4';
             buffer4[1021] = '/';
             buffer4[1022] = '@';
             buffer4[1023] = '/';
             
             bytes_read5 = fread(&buffer5[40], 1, 981, fp);
+           // buffer5[1020] = '5';
             buffer5[1021] = '/';
             buffer5[1022] = '@';
             buffer5[1023] = '/';
@@ -153,6 +158,14 @@ int main(int argc, char **argv){
     	buffer[0] = 'A';
     	buffer[9] = num[0];
     	buffer[10] = num[1];
+    	
+    	buffer[11] = '1';
+    	buffer2[11] = '2';
+    	buffer3[11] = '3';
+    	buffer4[11] = '4';
+    	buffer5[11] = '5';
+    	
+    	
         if (expected == 'A'){
             expected = 'B';
         } else if (expected == 'B'){
@@ -163,11 +176,17 @@ int main(int argc, char **argv){
             return 0;
         }
         
+        
         sendto(sockfd, buffer, (bytes_read + 43), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+            printf("Packet %d sent.\n", (buffer[11]-'0'));
         sendto(sockfd, buffer2, (bytes_read2 + 43), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+			printf("Packet %d sent.\n", (buffer2[11]-'0'));
         sendto(sockfd, buffer3, (bytes_read3 + 43), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+			printf("Packet %d sent.\n", (buffer3[11]-'0'));
         sendto(sockfd, buffer4, (bytes_read4 + 43), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+			printf("Packet %d sent.\n", (buffer4[11]-'0'));
         sendto(sockfd, buffer5, (bytes_read5 + 43), 0, (struct sockaddr *)clientaddr, sizeof(*clientaddr));
+			printf("Packet %d sent.\n", (buffer5[11]-'0'));
         
         printf("5 packets sent, waiting for response\n");
         bytes+=(bytes_read + bytes_read2 + bytes_read3 + bytes_read4 + bytes_read5);
