@@ -117,32 +117,27 @@ int main(int argc, char **argv){
             buffer5[bytes_read5+42] = '/';
         }
         else {
-            bytes_read = fread(&buffer[40], 1, 981, fp);
-            //buffer[1020] = '1';
+            bytes_read = fread(&buffer[40], 1, 981, fp);            
             buffer[1021] = '/';
             buffer[1022] = '@';
             buffer[1023] = '/';
             
-            bytes_read2 = fread(&buffer2[40], 1, 981, fp);
-            //buffer2[1020] = '2';
+            bytes_read2 = fread(&buffer2[40], 1, 981, fp);            
             buffer2[1021] = '/';
             buffer2[1022] = '@';
             buffer2[1023] = '/';
             
-            bytes_read3 = fread(&buffer3[40], 1, 981, fp);
-           // buffer3[1020] = '3';
+            bytes_read3 = fread(&buffer3[40], 1, 981, fp);          
             buffer3[1021] = '/';
             buffer3[1022] = '@';
             buffer3[1023] = '/';
             
-            bytes_read4 = fread(&buffer4[40], 1, 981, fp);
-           // buffer4[1020] = '4';
+            bytes_read4 = fread(&buffer4[40], 1, 981, fp);           
             buffer4[1021] = '/';
             buffer4[1022] = '@';
             buffer4[1023] = '/';
             
-            bytes_read5 = fread(&buffer5[40], 1, 981, fp);
-           // buffer5[1020] = '5';
+            bytes_read5 = fread(&buffer5[40], 1, 981, fp);         
             buffer5[1021] = '/';
             buffer5[1022] = '@';
             buffer5[1023] = '/';
