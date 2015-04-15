@@ -83,6 +83,13 @@ int main(int argc, char **argv){
 											
   char expected = 'A';
   int pLen;
+  int packetNum;
+  
+  // Use to check if packets are received in the correct order
+  int correctOrder[5] = {1, 2, 3, 4, 5};
+  //Can't figure out how to append each packet number into the array and then check
+  int receivedOrder[5];
+  
   //int pSent;
   char npr[2] = { "ZR" };
   int packets = 0;
@@ -91,15 +98,34 @@ int main(int argc, char **argv){
     recvData = (char*) malloc (1024);
     char response[2] = {expected, 'R'};	  
     pLen = recvfrom(sockfd, recvData, 1024, 0, NULL, NULL);
-    printf("Packet received from server.\n");
-    if (pLen > -1){							
+    
+
+       
+    //printf("Packet received from server.\n");
+    
+    if (pLen > -1){		
+		//int packetNum = recvData[1020] -'0';
+		//printf("Packet %d\n", packetNum);		
+		    // Check and print off packet number as they are received
+    packetNum = recvData[11] - '0';
+    printf("Packet #%d received from server\n",packetNum); 
+    
+    //Keep track of what number order packet you're at in order to test if correct packet received
+    if(packets <= 5)
+    {
+		packets++; 
+	} else
+	{
+		packets = 0;
+	}
+	printf("Expected : %d\n", packets);			
       if (recvData[0] == 'A'){			
         if (expected == 'A'){
           expected = 'B';
         } else {
           expected = 'A';     
         }
-        printf ("recvData[9]: %c\n", recvData[9]);
+        //printf ("recvData[9]: %c\n", recvData[9]);
         
     	int ch1 = recvData[9] - '0';
     	printf ("ch1: %d\n",ch1);
@@ -124,7 +150,7 @@ int main(int argc, char **argv){
         	printf (" pLen = %d ", pLen);
         	printf("Packet ack sent\n");
         	if (!feof(fp)){						
-          		packets++;
+          		//packets++;
         	}else 
           		printf("Error!\n");
         }
@@ -133,14 +159,15 @@ int main(int argc, char **argv){
         response[0] = 'E'; response[1] = 'R';
         sendto(sockfd, response, strlen(response), 0, (struct sockaddr*)serveraddr, sizeof(*serveraddr));
         //pSent = atoi(&recvData[8]);
-        printf("Received %d packets. \n",packets);
+        //printf("Received %d packets. \n",packets);
         fclose(fp);
         break;
       } else if (pLen > -1){				
-        printf("Got unexpected Char!\n");
-        printf("received:%s\n", recvData);
+       // printf("Got unexpected Char!\n");
+       // printf("received:%s\n", recvData);
       }
     } else {
+		
       printf("TIMEOUT: No Packet received\n");
       sendto(sockfd, npr, strlen(npr), 0, (struct sockaddr*)serveraddr, sizeof(*serveraddr));
     }
